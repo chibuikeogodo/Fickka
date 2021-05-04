@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block body%}
+{%if user.is_authenticated%}
+<div class="container">
+    <p class="h5">Sorry, You're already logged in</p>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{%else%}
+<div class="container">
+	{% if messages %}
+		  <ul class="messages">
+			{% for message in messages %}
+			  <div class="alert alert-danger {{ message.tags }}" role="alert">
+				  {{ message }}
+			  </div>
+			{% endfor %}
+		  </ul>
+	{% endif %}
+</div>
+<div class="container">
+    <div class="h2" align="center">Create New account</div>
+    <form method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button class="btn btn-success">Register</button>
+    </form>
+    <small>Already have account? <a href="{%url 'login'%}">login</a> </small>
+</div>
+{%endif%}
+
+{%endblock%}

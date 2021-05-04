@@ -1,0 +1,167 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block title%}
+Create New Post
+{%endblock%}
+{% block body %}
+{%include 'user_page.html'%}
+<!-- Feature post -->
+
+	<!-- Post -->
+	<section class="post bg0 p-t-85">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+						<!-- Entertainment  -->
+						<div class="p-b-25">
+							<div class="how2 how2-cl1 flex-s-c" style="background-color:#509fa6">
+								<h3 class="f1-m-2 cl12 tab01-title">
+									<div class="h3" align="center" style="color:#bccc7c;">Create a Fick</div>
+								</h3>
+							</div>
+                            <!-----------Ths is for every other thing------->
+							<br/>
+                            <form method="POST" enctype="multipart/form-data">
+                                {%csrf_token%}
+									{%include 'note.html'%}
+								{{form.as_p}}
+								<br/>
+                                <button class="btn btn-primary btn-lg btn-block">Create post</button>
+                            </form>
+
+
+                            <!------End for all---->
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+						<!-- Stay Connected -->
+						<div class="p-b-35">
+							<div class="how2 how2-cl4 flex-s-c">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Stay Connected
+								</h3>
+							</div>
+
+							{%include 'advert_space.html'%}
+						</div>
+
+						<!-- Most Popular -->
+
+
+
+
+						<!--End Most popular  -->
+						<!--Advert placement  -->
+
+
+
+						<!--endAdvert placement  -->
+
+						<!-- Video -->
+						<div class="p-b-55">
+							<div class="how2 how2-cl4 flex-s-c m-b-35">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Featured Video
+								</h3>
+							</div>
+
+							<div>
+								<div class="wrap-pic-w pos-relative">
+									<img src="{%static 'front/images/video-01.jpg' %}" alt="IMG">
+
+									<button class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03" data-toggle="modal" data-target="#modal-video-01">
+										<span class="fab fa-youtube"></span>
+									</button>
+								</div>
+
+								<div class="p-tb-16 p-rl-25 bg3">
+									<h5 class="p-b-5">
+										<a href="#" class="f1-m-3 cl0 hov-cl10 trans-03">
+											Music lorem ipsum dolor sit amet consectetur
+										</a>
+									</h5>
+
+									<span class="cl15">
+										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+											by John Alvarado
+										</a>
+
+										<span class="f1-s-3 m-rl-3">
+											-
+										</span>
+
+										<span class="f1-s-3">
+											Feb 18
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Subscribe -->
+
+
+						<!-- Tag -->
+						<div class="p-b-55">
+							<div class="how2 how2-cl4 flex-s-c m-b-30">
+								<h3 class="f1-m-2 cl3 tab01-title">
+									Tags
+								</h3>
+							</div>
+
+							<div class="flex-wr-s-s m-rl--5">
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Fashion
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Lifestyle
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Denim
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Streetstyle
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Crafts
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Magazine
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									News
+								</a>
+
+								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+									Blogs
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Banner -->
+	<div class="container m-t-10 m-b-15">
+		<div class="flex-c-c">
+			<a href="#">
+				<img class="max-w-full" src="{%static 'front/images/banner-01.jpg' %}" alt="IMG">
+			</a>
+		</div>
+	</div>
+
+
+{% endblock %}

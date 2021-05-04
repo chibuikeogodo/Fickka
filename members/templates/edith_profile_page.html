@@ -1,0 +1,75 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block title%}
+Edith Profile Page
+{%endblock%}
+{% block body %}
+{%include 'user_page.html'%}
+<!-- Feature post -->
+
+	<!-- Post -->
+{%if user.is_authenticated%}
+	{%if user.id == profile.user.id%}
+	<section class="post bg0 p-t-85">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+						<!-- Entertainment  -->
+						<div class="p-b-25">
+							<div class="how2 how2-cl1 flex-s-c"  style="background-color:#509fa6">
+								<h3 class="f1-m-2 cl12 tab01-title">
+									<div class="h3" align="center" style="color:#bccc7c;">Edit profile page</div>
+								</h3>
+							</div>
+                            <!-----------Ths is for every other thing------->
+							<br/>
+
+                            <form method="POST" enctype="multipart/form-data">
+                                {%csrf_token%}
+								<label><b>{{form.Biography.label}}</b></label>
+								{{form.Biography}}<br/>
+								<label><b>{{form.Gender.label}}</b></label>
+								{{form.Gender}}<br/>
+								<label><b>{{form.Occupation.label}}</b></label>
+								{{form.Occupation}}<br/>
+								<label><b>{{form.State.label}}</b></label>
+								{{form.State}}<br/>
+								<label><b>{{form.Contact.label}}</b></label>
+								{{form.Contact}}<br/>
+								<label><b>{{form.fb_url.label}}</b></label>
+								{{form.fb_url}}<br/>
+								<label><b>{{form.twitter_url.label}}</b></label>
+								{{form.twitter_url}}<br/>
+								<label><b>{{form.instagram_url.label}}</b></label>
+								{{form.instagram_url}}
+								<label><b>{{form.profile_pic.label}}</b></label>
+								{{form.profile_pic}}
+								<br/>
+                                <button class="btn btn-primary btn-lg btn-block">Update profile</button>
+                            </form>
+
+
+                            <!------End for all---->
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+						<!-- Stay Connected -->
+								{%include 'advert_space.html'%}
+							</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{%endif%}
+{%endif%}
+>
+
+
+{% endblock %}

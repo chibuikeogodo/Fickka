@@ -1,0 +1,23 @@
+{%load static%}
+{%load social_share%}
+<div class="container">
+    {%if user.is_authenticated%}
+    <form action="{%url 'like_post' post.id post.slug%}"  method="POST">
+        {%csrf_token%}
+        {%if liked %}
+        <button type="submit", name="post_id", value="{{post.id}}",
+                class=""><img src="{%static 'front/images/icons/unlike11.jpg' %}" width="25px" height="25px"></button>
+        {%else%}
+        <button type="submit", name="post_id", value="{{post.id}}",
+        ><img src="{%static 'front/images/icons/like22.jpg' %}" width="25px" height="25px"></button>
+        {%endif%}
+    {%endif%}
+        {%if total_likes >= 2%}
+        {{total_likes}} Likes
+        {%else%}
+        {{total_likes}} Like
+        {%endif%}
+       
+    </form><br/>
+
+</div>

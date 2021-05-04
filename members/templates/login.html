@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+    <title>
+        {%block title%}
+        Login
+        {%endblock%}
+    </title>
+
+{%block body%}
+<style>
+.signup {
+  background-color: #f1f1f1;
+  text-align: center;
+
+</style>
+{%if user.is_authenticated%}
+    <div class="container">
+        <h3>You're already logged in</h3> Go to <a href="{%url 'home' %}">home</a>
+    </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+{%else%}
+<div class="container">
+	{% if messages %}
+		  <ul class="messages">
+			{% for message in messages %}
+			  <div class="alert alert-success {{ message.tags }}" role="alert">
+				  {{ message }}
+			  </div>
+			{% endfor %}
+		  </ul>
+	{% endif %}
+</div>
+<div class="container" align="center">
+    <div class="col-sm-6">
+      <div class="card-body">
+      <div class="card-header">
+        <div class="h2">LOGIN</div>
+     </div><br/>
+        <div class="form-group">
+        <form method="POST">
+            {%csrf_token%}
+            <div class="form-group">
+
+                <label for=""><b>Username</b></label>
+                <input type="text" class="form-control" name="username">
+            </div>
+            <div class="form-group">
+                <label for=""><b>Password</b></label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            {%if request.GET.next%}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {%endif%}
+            <button class="btn btn-primary">Login</button>
+        </form>
+        <div class="">
+           <small>Don't have account? <a href="{%url 'register' %}">Create Account</a></small>
+        </div>
+    </div>
+      </div>
+  </div>
+</div>
+{%endif%}
+
+
+{%endblock%}

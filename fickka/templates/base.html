@@ -1,0 +1,329 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>
+		{%block title%}
+		fickka.com | Let's Talk about it
+		{%endblock%}
+	</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{%static 'front/images/icons/logo.jpg'%}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/css/util.min.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/css/main.css'%}">
+	<link rel="stylesheet" type="text/css" href="{%static 'front/css/style2.css'%}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{%static 'front/js/bootstrap.min.css'%}">
+	<script src="{%static 'front/js/jquery.min.js' %}"></script>
+	<script src="{%static 'front/js/popper.min.js' %}"></script>
+	<script src="{%static 'front/js/bootstrap.min.js' %}"></script>
+
+
+
+</head>
+<body class="animsition">
+
+	<!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop"  >
+			<div class="topbar" style="background-color:#509fa6">
+				<div class="content-topbar h-100 p-rl-30" style="background-color:#509fa6">
+
+
+
+					<div class="flex-wr-e-c">
+						<div class="left-topbar">
+							<span class="left-topbar-item flex-wr-s-c" style="color:#111" >
+								<span>
+								<p id="demo"></p>
+								<script>
+								var d = new Date();
+								document.getElementById("demo").innerHTML = d;
+								</script>
+								</span>
+							</span>
+							<a href="{%url 'home' %}" class="left-topbar-item" style="color:#111">
+								Home
+							</a>
+
+							<a href="{%url 'about_us' %}" class="left-topbar-item" style="color:#111">
+								About
+							</a>
+
+							<a href="{%url 'contact_us'%}" class="left-topbar-item" style="color:#111">
+								Contact Us
+							</a>
+							<a href="front/contact.html" class="left-topbar-item" style="color:#111">
+								Advertise
+							</a>
+							<a href="" class="left-topbar-item" style="color:#111">
+								Become a Fickka
+							</a>
+
+							{%if user.is_authenticated%}
+							<a href="{%url 'create_post' %}" class="left-topbar-item" style="color:#111">
+								Create a Fick
+							</a>
+							<a href="" class="left-topbar-item" style="color:#111">
+								Report Post
+							</a>
+							<li class="nav-item dropdown" style="color:#111">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#111">
+								  Profile
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="{%url 'edith_profile' %}">Edit Settings</a>
+								{%if user.profile.id%}
+								  <a class="dropdown-item" href="{%url 'Edith_Profile_PageView' user.profile.id%}">Edit Profile</a>
+								  <a class="dropdown-item" href="{%url 'Show_Profile_PageView' user.profile.id%}">My Profile</a>
+								{%else%}
+									 <a class="dropdown-item" href="{%url 'Create_profile'%}">Create Profile</a>
+								{%endif%}
+							  </li>
+
+
+							<a href="{%url 'logout'%}" class="left-topbar-item" style="color:#111">
+								Log Out
+							</a>
+							{%else%}
+
+							<a href="{%url 'register' %}" class="left-topbar-item" style="color:#111">
+								Sing up
+							</a>
+
+							<a href="{%url 'login' %}" class="left-topbar-item" style="color:#111">
+								Log in
+							</a>
+							{%endif%}
+
+							<a href="#" class="left-topbar-item"></a>
+						</div>
+
+						<div class="right-topbar p-l-18">
+							<a href="https://www.facebook.com/fickkapage">
+								<span class="fab fa-facebook-f" style="color:#111"></span>
+							</a>
+
+							<a href="{%url 'home'%}">
+								<span class="fab fa-twitter" style="color:#111"></span>
+							</a>
+
+							<a href="{%url 'home'%}">
+								<span class="fab fa-youtube" style="color:#111"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br/>
+
+			<!-- Header Mobile -->
+			<br/>
+			<div class="wrap-header-mobile">
+				<!-- Logo moblie -->
+				<div class="container" align="center">
+					<h1 class="display-3"  font><a href="{%url 'home' %}"><img src="{%static 'front/images/icons/logo.jpg'%}" width="320" height="140"></a></h1>
+
+				</div>
+
+
+				<!-- Button show menu -->
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
+					<span class="hamburger-box">
+
+					</span>
+				</div>
+			</div>
+
+			<!-- Menu Mobile -->
+			<div class="menu-mobile">
+				<br/>
+				<br/>
+				<ul class="topbar-mobile">
+					<li class="left-topbar">
+						<span class="left-topbar-item flex-wr-s-c">
+							<span>
+								<p id="demo"></p>
+								<script>
+								var d = new Date();
+								document.getElementById("demo").innerHTML = d;
+								</script>
+							</span>
+						</span>
+					</li>
+
+					<li class="left-topbar">
+						<a href="{%url 'home' %}" class="left-topbar-item">
+								Home
+						</a>
+						<a href="front/contact.html" class="left-topbar-item">
+							Contact Us
+						</a>
+						<a href="front/contact.html" class="left-topbar-item">
+							Advertise
+						</a>
+						<a href="" class="left-topbar-item">
+								Hire a Fickka
+						</a>
+						<a href="" class="left-topbar-item">
+								Become a Fickka
+						</a>
+						{%if user.is_authenticated%}
+						<a href="{}" class="left-topbar-item">
+								Create a Fick
+						</a>
+						<a href="{%url 'logout' %}" class="left-topbar-item">
+								Log Out
+						</a>
+						{%else%}
+						<a href="{%url 'register' %}" class="left-topbar-item">
+							Sing up
+						</a>
+
+						<a href="{%url 'login' %}" class="left-topbar-item">
+							Log in
+						</a>
+						{%endif%}
+					</li>
+
+					<li class="right-topbar">
+						<a href="#">
+							<span class="fab fa-facebook-f"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-twitter"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-pinterest-p"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-vimeo-v"></span>
+						</a>
+
+						<a href="#">
+							<span class="fab fa-youtube"></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!--  -->
+			<div class="wrap-logo no-banner container">
+				<!-- Logo desktop -->
+				<div class="logo">
+					<div class="container">
+						<h1 align="center" class="display-3"  font><a href="{%url 'home' %}"><img src="{%static 'front/images/icons/logo.jpg'%}" width="350" height="180"></a></h1>
+
+					</div>
+				</div>
+			</div>
+			<br/>
+
+		</div>
+	</header>
+<br/>
+
+
+
+<!---Banner-->
+
+<!----Banner End--->
+{% block body %}
+
+
+{% endblock %}
+
+	<br/>
+	<br/>
+	<!-- Footer -->
+	<footer>
+		<div class="bg2 p-t-40 p-b-25">
+			<div class="container" align="center">
+					<div class="col-lg-4 p-b-20">
+
+						<div>
+							<div class="container">
+								<div class="h5">Follow our social handles</div>
+							</div>
+							<div class="p-t-15">
+								<a href="https://www.facebook.com/fickkapage" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-facebook-f"></span>
+								</a>
+
+								<a href="{%url 'home'%}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-twitter"></span>
+								</a>
+
+								<a href="{%url 'home'%}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-pinterest-p"></span>
+								</a>
+
+								<a href="{%url 'home'%}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-vimeo-v"></span>
+								</a>
+
+								<a href="{%url 'home'%}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-youtube"></span>
+								</a>
+								<br/>
+<!---THE CATEGORY IS HERE
+
+	ENDS HERE
+----->
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="bg11">
+			<div class="container size-h-4 flex-c-c p-tb-15">
+				<span class="f1-s-1 cl0 txt-center">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved. <br/>Every user here is entitled to any <b>Ficks</b> he/she post here. Fickka.com and his management should not be held responsible in anyway.
+
+				</span>
+			</div>
+		</div>
+	</footer>
+<!--===============================================================================================-->
+	<script src="{%static 'front/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'front/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'front/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{%static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{%static 'front/js/main.js' %}"></script>
+<script type="text/javascript">
+
+
+
+
+</script>
+
+</body>
+</html>

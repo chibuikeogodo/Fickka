@@ -1,0 +1,102 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block title%}
+{{page_user| title}} Profile
+{%endblock%}
+{% block body %}
+{%include 'user_page.html'%}
+<section class="post bg0 p-t-85">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+						<!-- Entertainment  -->
+						<div class="p-b-25">
+							<div class="how2 how2-cl1 flex-s-c"  style="background-color:#509fa6">
+								<h3 class="f1-m-2 cl12 tab01-title">
+									<div class="h3" align="center" style="color:#bccc7c;">{{page_user.user | title}}'s Profile</div>
+								</h3>
+							</div>
+                            <!-----------Ths is for every other thing------->
+							<br/>
+									{%if page_user.profile_pic%}
+									  <img src="{{page_user.profile_pic.url}}" height="400" width="400">
+									{%else%}
+										<img src="{%static 'front/images/user.jpg'%}"  height="400" width="400">
+									{%endif%}
+							<br/>
+							<br/>
+							<p class="h5" align="center">User Details</p>
+									<table class="table">
+										  <thead>
+											<tr>
+											  <th scope="col">Full name</th>
+											  <th scope="col"></th>
+											  <th scope="col"></th>
+											  <th scope="col">{{page_user.user.first_name}} {{page_user.user.last_name}}</th>
+											</tr>
+										  </thead>
+										  <tbody>
+											<tr>
+											  <th scope="row">Username</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{page_user.user}}
+												  {% if page_user.confirmed == True%}
+												 	 <img src="{%static 'front/images/icons/verified.jpg' %}" width="50" height="15">
+												  {%endif%}
+											  </td>
+											</tr>
+											<tr>
+											  <th scope="row">Date Joined</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{user.date_joined}}</td>
+											</tr>
+											<tr>
+											  <th scope="row">Gender</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{page_user.Gender}}</td>
+											</tr>
+											<tr>
+											  <th scope="row">State</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{page_user.State}}</td>
+											</tr>
+											<tr>
+											  <th scope="row">Occupation</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{page_user.Occupation}}</td>
+											</tr>
+											<tr>
+											  <th scope="row">Contact</th>
+											  <td></td>
+											  <td></td>
+											  <td>{{page_user.Contact}}</td>
+											</tr>
+										  </tbody>
+									</table>
+
+                            <!------End for all---->
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+						<!-- Stay Connected -->
+							{%include 'advert_space.html'%}
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

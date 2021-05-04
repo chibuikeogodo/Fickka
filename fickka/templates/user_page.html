@@ -1,0 +1,160 @@
+{%load static%}
+{%if user.is_authenticated%}
+	{%if user.profile.id%}
+	<div class="container" >
+	<div class="card">
+		<div class="card-header" style="background-color:#509fa6">
+			<div class="container">
+				<p align="center" class="h5" style="color:#bccc7c">
+					{%if user.profile.profile_pic%}
+						<img src="{{user.profile.profile_pic.url}}" height="35" width="35" class="rounded-circle">
+					{%else%}
+						<img src="{%static 'front/images/user.jpg'%}" height="35" width="35" class="rounded-circle">
+					{%endif%}
+					<b>Welcome {{request.user}}</b></p>
+			</div>
+		</div>
+		<ul class="nav justify-content-center">
+		 <li class="nav-item" style="color:#bccc7c">
+			<a class="nav-link" href="{%url 'home'%}">Home</a>
+		  </li>
+			<li class="nav-item" style="color:#bccc7c">
+			<a class="nav-link" href="{%url 'contact_us'%}">Contact</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">Advertise</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">Request a Fick</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'create_post'%}">Create Fick</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'edith_profile' %}">Settings</a>
+		  </li>
+		{%if user.profile.id%}
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'Edith_Profile_PageView' user.profile.id%}">Edit Profile</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'Show_Profile_PageView' user.profile.id%}">My Profile</a>
+		  </li>
+		{%else%}
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'Create_profile'%}">Create Profile</a>
+		  </li>
+		{%endif%}
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'logout' %}">Logout</a>
+		  </li>
+		</ul>
+		<nav class="navbar navbar-light bg-light" >
+		  <a class="navbar-brand" id="hidden"></a>
+		  <form class="form-inline"  action="{%url 'search_result' %}" method="get">
+			<input class="form-control mr-sm-2" type="search" placeholder="Search on fickka.com" aria-label="Search" name="search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		  </form>
+		</nav>
+	</div>
+
+
+	</div>
+
+	{%else%}
+	<div class="container">
+	<div class="card">
+		<div class="card-header" style="background-color:#509fa6">
+			<div class="container">
+				<div class="container">
+				<p align="center" class="h5" style="color:#bccc7c">
+						<img src="{%static 'front/images/user.jpg'%}" height="35" width="35" class="rounded-circle">
+					<b>Welcome {{request.user}}</b></p>
+			</div>
+
+			</div>
+		</div>
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'home'%}">Home</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'contact_us'%}">Contact</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">Advertise</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">Request a Fick</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'create_post'%}">Create Fick</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'edith_profile' %}">Settings</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'Create_profile'%}">Create Profile</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'logout' %}">Logout</a>
+		  </li>
+		</ul>
+			<nav class="navbar navbar-light bg-light" >
+			  <a class="navbar-brand" id="hidden"></a>
+			  <form class="form-inline"  action="{%url 'search_result' %}" method="get">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search on fickka.com" aria-label="Search" name="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </form>
+			</nav>
+			<div class="alert alert-warning">
+			Hello <strong>{{request.user}}</strong> You're yet to set up your profile, please do so by clicking on the create profile above for people to know you better. Thank you!
+		</div>
+	</div>
+	</div>
+
+	{%endif%}
+{%else%}
+<div class="container">
+	<div class="card">
+		<div class="card-header" style="background-color:#509fa6">
+			<div class="container">
+				<div class="container">
+				<p align="center" class="h5" style="color:#bccc7c">
+						<img src="{%static 'front/images/user.jpg'%}" height="35" width="35" class="rounded-circle">
+					<b>Welcome Guest</b></p>
+			</div>
+
+			</div>
+		</div>
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'home'%}">Home</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'contact_us'%}">Contact</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">Advertise</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="">About</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'register'%}">Sign Up</a>
+		  </li>
+			<li class="nav-item">
+			<a class="nav-link" href="{%url 'login'%}">Login</a>
+		  </li>
+		</ul>
+			<nav class="navbar navbar-light bg-light" >
+			  <a class="navbar-brand" id="hidden"></a>
+			  <form class="form-inline"  action="{%url 'search_result' %}" method="get">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search on fickka.com" aria-label="Search" name="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </form>
+			</nav>
+	</div>
+	</div>
+
+{%endif%}

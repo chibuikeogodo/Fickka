@@ -1,0 +1,72 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block title%}
+Update | {{post.title}}
+{%endblock%}
+{% block body %}
+
+<!-- Feature post -->
+
+	<!-- Post -->
+	<section class="post bg0 p-t-85">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+						<!-- Entertainment  -->
+						<div class="p-b-25">
+							<div class="how2 how2-cl1 flex-s-c" style="background-color:#509fa6" >
+								<h3 class="f1-m-2 cl12 tab01-title">
+									<div class="h3" align="center" style="color:#bccc7c;">Update Ficks</div>
+								</h3>
+							</div>
+                            <!-----------Ths is for every other thing------->
+							<br/>
+							{%if user.is_authenticated%}
+                            <form method="POST">
+
+                                {%csrf_token%}
+								<label><b>First, give the post a number: {{form.post_number.label}}</b></label>
+								{{form.post_number}}<br/>
+								<label><b>Edit the Title: {{form.post_title.label}}</b></label>
+								{{form.post_title}}<br/>
+								<label>Finally, Tick the button {{form.To_homepage.label}}</label><br/>
+								<button>{{form.To_homepage}}</button>
+								<br/>
+								<label><b>{{form.title.label}}</b></label>
+								{{form.title}}<br/>
+								<label><b>{{form.content.label}}</b></label>
+								{{form.content}}<br/>
+								<label><b>{{form.category.label}}</b></label>
+								{{form.category}}<br/>
+								<button class="btn btn-success ">submit</button>
+
+
+								<br/>
+
+                            </form>
+							{%else%}
+							Sorry, you can't view this page as a guest, Login <a href="{%url 'login'%}">Here</a> to continue
+							{%endif%}
+
+
+                            <!------End for all---->
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+						<!-- Stay Connected -->
+								{%include 'advert_space.html'%}
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+{% endblock %}

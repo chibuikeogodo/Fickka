@@ -1,0 +1,78 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block title%}
+Create New Post
+{%endblock%}
+{% block body %}
+{%include 'user_page.html'%}
+
+	<!-- Post -->
+	<section class="post bg0 p-t-85">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10 col-lg-8">
+					<div class="p-r-10 p-rl-0-sr991 p-b-20">
+						<!-- Entertainment  -->
+						<div class="p-b-25">
+							<div class="how2 how2-cl1 flex-s-c" style="background-color:#509fa6">
+								<h3 class="f1-m-2 cl12 tab01-title" style="background-color:#509fa6">
+									<div class="h3" align="center" style="color:#bccc7c;">Contact Us</div>
+								</h3>
+							</div>
+                            <!-----------Ths is for every other thing------->
+							<br/>
+
+								<!-- Content -->
+								<section class="bg0 p-b-60">
+									<div class="container">
+										<div class="row justify-content-center">
+											<div class="col-md-7 col-lg-8 p-b-80">
+												<div class="p-r-10 p-r-0-sr991">
+													<form class="form-group">
+														<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
+
+														<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
+
+														<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
+
+														<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Your Message"></textarea>
+
+														<button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20">
+															Send
+														</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+
+
+                            <!------End for all---->
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-lg-4">
+					<div class="p-l-10 p-rl-0-sr991 p-b-20">
+						<!-- Stay Connected -->
+
+							{%include 'advert_space.html'%}
+						</div>
+
+						<!-- Most Popular -->
+
+
+
+
+						<!--End Most popular  -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

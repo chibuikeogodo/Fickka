@@ -1,0 +1,213 @@
+{%extends 'base.html' %}
+{%load social_share%}
+{%load static%}
+{%block title%}
+{{post.title}}
+{%endblock%}
+{% block body %}
+{%include 'user_page.html'%}
+<br/>
+<br/>
+<div class="container">
+    	{% if messages %}
+		  <ul class="messages">
+			{% for message in messages %}
+			  <div class="alert alert-success {{ message.tags }}" role="alert">
+				  {{ message }}
+			  </div>
+			{% endfor %}
+		  </ul>
+	{% endif %}
+</div>
+<div class="container">
+    <div class="h5" align="center"><strong>{{post.title}}</strong></div>
+        <p align="center"><small>By <strong><a href="">{{post.author|title}}</a> </strong> on {{post.date_posted}}{%if user.id == post.author.id%} <a href="{%url 'add_thrend' post.pk%}">AddMore</a>  | {%endif%} {%if user.is_superuser%}<a href="{%url 'update_post' post.pk %}">Edit</a> | <a href="{}">Delete</a> {%endif%}</small></p>
+    <hr/>
+    <br>
+    {{post.content|safe|linebreaksbr|linebreaks|urlize}}
+    <br/>
+
+
+   {% if post.image_1%}
+         <img src="{{post.image_1.url}}" class="img-fluid" alt="Responsive image">
+   {%endif%}
+    <br/><br/>
+   {% if post.image_2%}
+        <img src="{{post.image_2.url}}" class="img-fluid" alt="Responsive image">
+   {%endif%}
+    <br/><br/>
+   {% if post.image_3%}
+        <img src="{{post.image_3.url}}" class="img-fluid" alt="Responsive image">
+   {%endif%}
+
+    <hr>
+    {%for thread in post.thread.all%}
+    {{thread.threads|safe|linebreaksbr|linebreaks}}
+    <br/>
+       {% if thread.image_1%}
+            <img src="{{thread.image_1.url}}" class="img-fluid" alt="Responsive image">
+       {%endif%}
+    <br/><br/>
+       {% if thread.image_2%}
+            <img src="{{thread.image_2.url}}" class="img-fluid" alt="Responsive image">
+       {%endif%}
+    <br/><br/>
+       {% if thread.image_3%}
+            <img src="{{thread.image_3.url}}" class="img-fluid" alt="Responsive image">
+       {%endif%}
+    <hr>
+    {%endfor%}
+Share On:<small>{%post_to_facebook object_or_url 'Facebook' 'post.title' %}   {%include 'like_section.html'%}</small>
+
+</div>
+
+<br/>
+<div class="container">
+        <b class="h5">About the Author</b>
+    <br/><br/>
+</div>
+<div class="container">
+<div class="mb-3" >
+  <div class="row no-gutters">
+    <div class="col-md-2">
+ {% if post.author.profile.id %}
+            {%if post.author.profile.profile_pic%}
+                  <img src="{{post.author.profile.profile_pic.url}}" class="rounded-circle" height="120" width="120">
+            {%else%}
+                <img src="{%static 'front/images/user.jpg'%}" class="rounded-circle" height="120" width="120">
+            {%endif%}
+  {%else%}
+      <img src="{%static 'front/images/user.jpg'%}" class="rounded-circle" height="120" width="120">
+  {%endif%}
+       <br/>
+        <small>{% if post.author.profile.id %}<a href="{%url 'Show_Profile_PageView' post.author.profile.id%}">My Profile | </a>{%endif%}<a href="{%url 'user_post_list' post.author.id%}">My Ficks</a></small>
+<br/>
+<br/>
+        <small>
+            follow on<br/>
+            <b>
+                {%if post.author.profile.fb_url%}
+                <a href="{{post.author.profile.fb_url}}"><img src="{%static 'front/images/icons/facebook2.jpg'%}" class="rounded-circle" height="20" width="20"></a>
+                {%endif%}
+                {%if post.author.profile.twitter_url%}
+                 <a href="{{post.author.profile.twitter_url}}"><img src="{%static 'front/images/icons/twitter2.png'%}" class="rounded-circle" height="20" width="20"></a>
+                {%endif%}
+                {%if post.author.profile.instagram_url%}
+                 <a href="{{post.author.profile.instagram_url}}"><img src="{%static 'front/images/icons/instagram.jpg'%}" class="rounded-circle" height="20" width="20"></a>
+                {%endif%}
+            </b>
+        </small>
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+          <h5 class="card-title">
+              <b class="h5">
+                  {{post.author|title}}
+                    {% if post.author.profile.confirmed == True%}
+                      <img src="{%static 'front/images/icons/verified.jpg' %}" width="60" height="20">
+                    {%endif%}
+              </b>
+          </h5>
+          {%if post.author.profile.Biography%}
+            <p class="card-text">{{post.author.profile.Biography}}</p>
+          {%else%}
+          <p><b>Bio</b>: This user is yet to update a biography, please <b>{{post.author}}</b>, do well to update your profile for people to know you better</p>
+          {%endif%}
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% if user.is_authenticated%}
+<div class="container">
+ <form method="post">
+    {%csrf_token%}
+    {{comment_form.as_p}}
+    <br/>
+    <button class="btn btn-info btn-sm">Post comment</button>
+</form>
+</div>
+
+
+{%else%}
+<div class="container">
+    Please <a href="{%url 'login' %}">login</a> to comment on this post
+</div>
+{%endif%}
+<br/>
+
+<div class="container-fluid">
+    <strong>{{comment.count}} Discussion{{ comment|pluralize}} on this Post</strong>
+{%if not post.comments.all%}
+    No comment yet
+{%else%}
+
+
+
+     <div class="container mt-3">
+    {%for comment in post.comments.all%}
+    {%if comment.is_parent%}
+    <br/>
+    <!----this is comment------>
+        <div class="container mt-3">
+            <div class="media border p-3">
+              {%if comment.name.profile.profile_pic%}
+                  <img src="{{comment.name.profile.profile_pic.url}}" class="rounded-circle" height="60px" width="60px">
+            {%else%}
+                <img src="{%static 'front/images/user.jpg'%}" class="rounded-circle" height="60" width="60">
+            {%endif%}
+                <br/><br/>
+              <div class="media-body">
+                <h4>by <b>{{comment.name}}</b> <small><i>Posted on {{comment.date}}</i></small></h4>
+                <p>{{comment.comment|safe|linebreaksbr|linebreaks}}</p>
+
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Reply</button>
+              <div id="demo" class="collapse">
+                {%for child_comment in comment.children%}
+        <div class="media p-3">
+            {%if child_comment.name.profile.profile_pic%}
+            <hr>
+                  <img src="{{child_comment.name.profile.profile_pic.url}}" class="rounded-circle" height="45px" width="45px">
+            {%else%}
+                <img src="{%static 'front/images/user.jpg'%}" class="rounded-circle" height="45" width="45">
+            {%endif%}
+          <div class="media-body">
+              <h4>Replied by <b>{{child_comment.name}}</b> <small><i>on {{child_comment.date}}</i></small></h4>
+            <p>{{child_comment.comment|safe|linebreaksbr|linebreaks}}</p>
+          </div>
+        </div>
+      {%endfor%}
+          {%if user.is_authenticated%}
+          <div class="col-md-5 col-sm-12" id="{{comment.pk}}">
+            <form method="POST" action="{%url 'comment_replay' post.pk comment.pk%}">
+                {%csrf_token%}
+                {{comment_form.as_p}}
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success mt-3">reply</button>
+                </div>
+            </form>
+          </div>
+              </div>
+        </div>
+
+
+          {%endif%}
+      </div>
+    </div>
+        {%endif%}
+    {%endfor%}
+
+{%endif%}
+
+
+    <!-----Comments and reply ends--->
+
+</div>
+
+
+
+{% endblock %}
