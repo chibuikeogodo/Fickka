@@ -11,7 +11,6 @@ from django.views import View
 from django.contrib.auth.forms import User
 from django.db.models import Q
 from django.contrib.messages.views import SuccessMessageMixin, messages
-
 from members.forms import PasswordChangeForms
 
 
@@ -54,11 +53,7 @@ class home(ListView):
         return context
 
 
-class Last_Post(ListView):
-    model = Post
-    template_name = 'home.html'
-    context_object_name = 'last'
-    paginate_by = 5
+
 
 
 
@@ -122,7 +117,7 @@ class CreateCategory(SuccessMessageMixin, CreateView):
     model = Category
     template_name = 'create_cat.html'
     form_class = CategoryForm
-    success_url = reverse_lazy('create_cate')
+    success_url = reverse_lazy('create_category')
     success_message = '%(name)s was added to Category list successfully'
 
 
@@ -136,6 +131,12 @@ class CreatePost(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'delete.html'
+    success_url = reverse_lazy('home')
 
 
 def article(request, id, slug):

@@ -33,6 +33,15 @@
 		  <li class="nav-item">
 			<a class="nav-link" href="{%url 'edith_profile' %}">Settings</a>
 		  </li>
+		{%if user.is_superuser%}
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'create_category' %}">Add Category</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="{%url 'control' %}">Control</a>
+		  </li>
+
+		{%endif%}
 		{%if user.profile.id%}
 		  <li class="nav-item">
 			<a class="nav-link" href="{%url 'Edith_Profile_PageView' user.profile.id%}">Edit Profile</a>

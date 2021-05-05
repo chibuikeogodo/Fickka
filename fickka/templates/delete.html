@@ -24,10 +24,10 @@ Create New Post
 							<br/>
                             <form method="POST" enctype="multipart/form-data">
                                 {%csrf_token%}
-									{%include 'note.html'%}
+									You're about to delete "{{post.title}}"
 								{{form.as_p}}
 								<br/>
-                                <button class="btn btn-primary btn-lg btn-block">Create post</button>
+                                <button class="btn btn-danger btn-lg btn-block">Delete</button>
                             </form>
 
 

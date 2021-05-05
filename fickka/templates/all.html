@@ -1,13 +1,26 @@
 {%extends 'base.html' %}
 {%load static%}
 {% block body %}
-{%include 'user_page.html'%}
 {%if user.is_superuser%}
+	{%include 'user_page.html'%}
+	<br/>
+	<div class="container">
+		{% if messages %}
+			  <ul class="messages">
+				{% for message in messages %}
+				  <div class="alert alert-success {{ message.tags }}" role="alert">
+					  {{ message }}
+				  </div>
+				{% endfor %}
+			  </ul>
+		{% endif %}
+	</div>
+
 	<div class="container">
 		<div class="container" align="center">
 		<div class="card">
-		<div class="card-header">
-			<div class="h3"><strong>Categories</strong></div>
+		<div class="card-header" style="background-color:#36838a">
+			<div class="h3" style="color:#bccc7c"><strong>Categories</strong></div>
 		</div>
 			<div class="container" align="center">
 			{%for item in cat_menu%}
@@ -15,11 +28,13 @@
 					{{item.name}} |
 				</a>
 			{%endfor%}
+
 			</div>
-
 	</div><br/>
-
-			<a href="{%url 'create_post'			%}"><button class="btn btn-info">Create a new fick</button></a>
+			{%if user.is_authenticated%}
+			{%else%}
+				<a href="{%url 'create_post'%}"><button class="btn btn-info">Create new post</button></a>
+			{%endif%}
 
 	</div>
 	<br/>
@@ -37,9 +52,9 @@
 
 							<!-- Life Style  -->
 							<div class="p-b-25 m-r--10 m-r-0-sr991">
-								<div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991">
+								<div class="how2 how2-cl5 flex-s-c m-r-10 m-r-0-sr991" style="background-color:#509fa6">
 									<h3 class="f1-m-2 cl17 tab01-title">
-										<div class="h4">Latest Ficks</div>
+										<div class="h4" style="color:#bccc7c; ">Latest Ficks</div>
 									</h3>
 								</div>
 
@@ -48,7 +63,7 @@
 									<div class="col-sm-6 p-r-25 p-r-15-sr991">
 										<!-- Item post -->
 										<div class="flex-wr-sb-s m-b-30">
-											<a href="{%url 'article' post.pk post.slug%}" class="size-w-1 wrap-pic-w hov1 trans-03">
+											<a href="{%url 'article' post.pk post.slug %}" class="size-w-1 wrap-pic-w hov1 trans-03">
 												{%if post.image_1%}
 												<img src="{{post.image_1.url}}" width="40px" height="80px">
 												{%elif post.image_2%}
@@ -61,8 +76,8 @@
 											</a>
 
 											<div class="size-w-2">
-												<h5 class="p-b-5">
-													<a href="{%url 'article' post.pk post.slug%}" class="f1-s-5 cl3 hov-cl10 trans-03">
+												<h5 class="p-b-5" style="color:#bccc7c">
+													<a href="{%url 'article' post.pk post.slug%}" class="f1-s-5 cl3 hov-cl10 trans-03" style="color:#79a8d4">
 														{%if post.post_title%}
 														{{post.post_title}}
 														{%else%}
@@ -71,13 +86,13 @@
 													</a>
 												</h5>
 
-												<span class="cl8">
+												<span class="cl8" style="color:#79a8d4">
 													on
-													<a href="{%url 'category_list' post.category.pk%}" class="f1-s-6 cl8 hov-cl10 trans-03">
+													<a href="{%url 'category_list' post.category.pk%}" class="f1-s-6 cl8 hov-cl10 trans-03" style="color:#79a8d4">
 														<strong>{{post.category}}</strong>
 													</a>
 													<span class="f1-s-3">
-														{{post.id}}
+														{%if user.is_superuser%}<b>| {{post.post_number}}</b>{%endif%}
 													</span>
 												</span>
 											</div>
@@ -89,41 +104,26 @@
 							</div>
 
 						</div>
+						<!---Pagination Starts-->
+						<div class="container">
+							<strong>Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</strong>
+						</div>
 						<nav aria-label="Page navigation example">
-		  <ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-			  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-			  <a class="page-link" href="#">Next</a>
-			</li>
-		  </ul>
-		</nav>
-						<br/><br/><br/>
-		<div class="container m-t-10 m-b-15">
-			<div class="flex-c-c">
-				<a href="#">
-					<img class="max-w-full" src="{%static 'front/images/banner-01.jpg' %}" alt="IMG">
-				</a>
-			</div>
-		</div><br/>
-		<div class="container m-t-10 m-b-15" >
-			<div class="flex-c-c">
-				<a href="#">
-					<img class="max-w-full" src="{%static 'front/images/banner-01.jpg' %}" alt="IMG">
-				</a>
-			</div>
-						</div><br/>
-		<div class="container m-t-10 m-b-15" >
-		<div class="flex-c-c">
-				<a href="#">
-					<img class="max-w-full" src="{%static 'front/images/banner-01.jpg' %}" alt="IMG">
-				</a>
-			</div>
-						</div><br/>
+						  <ul class="pagination justify-content-center">
+							  {%if page_obj.has_previous%}
+								<li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+								<li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+							  {%endif%}
+							  {%if page_obj.has_next%}
+								<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number}}">next</a></li>
+								<li class="page-item"><a class="page-link" href="{{page_obj.paginator.num_pages}}">last</a></li>
+								<li class="page-item">
+								</li>
+							  {%endif%}
+						  </ul>
+						</nav>
+						<!---Pagination Ends-->
+						<br/>
 					</div>
 
 					<!--------End for post-->
@@ -132,12 +132,6 @@
 					<div class="col-md-10 col-lg-4">
 						<div class="p-l-10 p-rl-0-sr991 p-b-20">
 							<!-- Stay Connected -->
-							<div class="p-b-35">
-								<div class="how2 how2-cl4 flex-s-c">
-									<h3 class="f1-m-2 cl3 tab01-title">
-										Stay Connected
-									</h3>
-								</div>
 
 								{%include 'advert_space.html'%}
 							</div>
@@ -193,10 +187,6 @@
 
 							<!-- Tag -->
 
-
-
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

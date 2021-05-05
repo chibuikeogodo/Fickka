@@ -21,7 +21,7 @@
 </div>
 <div class="container">
     <div class="h5" align="center"><strong>{{post.title}}</strong></div>
-        <p align="center"><small>By <strong><a href="">{{post.author|title}}</a> </strong> on {{post.date_posted}}{%if user.id == post.author.id%} <a href="{%url 'add_thrend' post.pk%}">AddMore</a>  | {%endif%} {%if user.is_superuser%}<a href="{%url 'update_post' post.pk %}">Edit</a> | <a href="{}">Delete</a> {%endif%}</small></p>
+        <p align="center"><small>By <strong><a href="">{{post.author|title}}</a> </strong> on {{post.date_posted}}{%if user.id == post.author.id%} <a href="{%url 'add_thrend' post.pk%}">AddMore</a>  | {%endif%} {%if user.is_superuser%}<a href="{%url 'update_post' post.pk %}">Edit</a> | <a href="{%url 'delete_post' post.pk%}">Delete</a> {%endif%}</small></p>
     <hr/>
     <br>
     {{post.content|safe|linebreaksbr|linebreaks|urlize}}
